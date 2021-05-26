@@ -1,6 +1,3 @@
-Before running do somthing like $ go mod vendor to collect the dependencies
-
-
 Run api with:
 
 
@@ -8,18 +5,24 @@ $ ./run
 
 
 
-It assumes a PostgresSQL db is running on localhost with user/password/etc just like in internal/service/router.go at line ~50  
-do smth like $ docker load with db.tar to get it
+It assumes a lot of dependencies and most importantly a PostgresSQL db running on localhost with config: postgres://postgres:postgres@127.0.0.1:5432/stuff?sslmode=disable.
+DB has to have a table called blobs described below.
 
-there'll be a docker run command here for it
+&nbsp;&nbsp;&nbsp;id |                   blob                       
+----+-------------------------------------------                                                     
+&nbsp;&nbsp;&nbsp;&nbsp;3 | {"User_id": 3, "User_name": "lol"}         
+ 
+ 
+ 
+ id     type:  integer; nullable:  not null; default nextval('blobs_id_seq'::regclass)         
+ blob   type:  jsonb;
 
 
 How to use the client:
 
 
 $ python3
->>> from client.py import *
->>> /*call some stuff */
 
+&#62;&#x3E;&gt; from client.py import *
 
-A lot of files are not used; Some important stuff is in internal/service/router.go
+Some files are not really used; Some important stuff is in internal/service/router.go
