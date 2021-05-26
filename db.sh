@@ -1,2 +1,2 @@
-docker pull 8const/db5
+docker pull 8const/db
 docker run -p 5432:5432 --name postgres db &
