@@ -14,11 +14,8 @@ DB has to have a table called blobs described below.
  
  
  
-                                                Table "public.blobs"                                  
- Column |  Type   | Collation | Nullable |              Default              | Storage  | Stats target | Description   
---------+---------+-----------+----------+-----------------------------------+----------+--------------+------------- 
- id     | integer |           | not null | nextval('blobs_id_seq'::regclass) | plain    |              |                 
- blob   | jsonb   |           |          |                                   | extended |              |                
+ id     type:  integer; nullable:  not null; default nextval('blobs_id_seq'::regclass)         
+ blob   type:  jsonb;
 
 
 How to use the client:
