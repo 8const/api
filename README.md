@@ -10,7 +10,7 @@ DB has to have a table called blobs described below.
 
 &nbsp;&nbsp;&nbsp;id |                   blob                       
 ----+-------------------------------------------                                                     
-&nbsp;&nbsp;&nbsp;3 | {"User_id": 3, "User_name": "lol"}         
+&nbsp;&nbsp;&nbsp;&nbsp;3 | {"User_id": 3, "User_name": "lol"}         
  
  
  
