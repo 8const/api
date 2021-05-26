@@ -1,12 +1,17 @@
 SETTING UP DB
 
 $ ./db.sh
+
 $ docker exec -it postgres bash
 
 container/# createdb -h localhost -p 5432 -U postgres stuff 
+
 container/# psql -U postgres
+
 postgres=#  \c stuff 
+
 postgres=#  CREATE TABLE blobs (id serial PRIMARY KEY, blob jsonb);
+
 
 Now you can run api with:
 
