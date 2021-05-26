@@ -23,6 +23,6 @@ How to use the client:
 
 $ python3
 
-&#62; &#x3E; &gt; from client.py import *
+&#62;&#x3E;&gt; from client.py import *
 
 Some files are not really used; Some important stuff is in internal/service/router.go
