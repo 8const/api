@@ -22,7 +22,7 @@ How to use the client:
 
 
 $ python3
->>> from client.py import *
->>> /*call some stuff */
+">>>" from client.py import *
+">>>" /*call some stuff */
 
 Some files are not really used; Some important stuff is in internal/service/router.go
