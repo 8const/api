@@ -13,6 +13,7 @@ SET UP ENVIRONMENT:
       $ export GO111MODULE=on
       $ export KV_VIPER_FILE=config.yaml
       $ go mod init
+      $ go mod vendor
 
 BUILD IT:
 
