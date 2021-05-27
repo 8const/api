@@ -32,5 +32,5 @@ RUN IT IN THE BACKGROUND:
 USE PYTHON CLIENT:
 
       $ python3
-      >>> from client.py import *
+      >>> from client import *
       /*help message will be printed*/
