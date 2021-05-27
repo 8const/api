@@ -65,7 +65,7 @@ func remel(slice []rune, i int) []rune {
 
 func (s *service) router() chi.Router {
     db, err := sql.Open("postgres",
-    "postgres://postgres:postgres@127.0.0.1:5432/stuff?sslmode=disable")
+    "postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable")
 
     err = db.Ping()
     if err != nil {
