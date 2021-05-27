@@ -1,2 +1,0 @@
-go build -o api main.go
-./api run service
