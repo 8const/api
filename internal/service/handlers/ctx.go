@@ -1,6 +1,7 @@
 package handlers
 
 import (
+    "api/internal/service/handlers/pg"
     "context"
     "strconv"
     "encoding/json"
@@ -89,11 +90,14 @@ func Ser(db *sql.DB) http.HandlerFunc {
         }
 
         //query for row with such id
-        var bb []byte
-        err = db.QueryRow("SELECT blob FROM blobs WHERE id=($1);", i).Scan(&bb)
+/*        err = db.QueryRow("SELECT blob FROM blobs WHERE id=($1);", i).Scan(&bb)
         if err != nil {
             panic(err)
         }
+*/
+
+        q := pg.NewBlobsQ(db)
+        bb := q.SelectById(i)
 
         //decode row to struct 
         b := Dunmarshal(bb)
@@ -194,5 +198,3 @@ func New(db *sql.DB) http.HandlerFunc {
     }
     return http.HandlerFunc(fn)
 }
-
-
