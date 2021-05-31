@@ -118,11 +118,12 @@ func Lis(db *sql.DB) http.HandlerFunc {
     fn := func(w http.ResponseWriter, r *http.Request) {
 
         //get all rows from db
-        rows, err := db.Query("SELECT * FROM blobs")
-        if err != nil {
-            panic(err)
-        }
-        defer rows.Close()
+        //rows, err := db.Query("SELECT * FROM blobs")
+
+
+        q := pg.NewBlobsQ(db)
+        rows := q.SelectAll()
+
 
         //form a string that looks like json
         //fill it with rows
@@ -131,7 +132,7 @@ func Lis(db *sql.DB) http.HandlerFunc {
             var b Dblob
             bb := Dmarshal(b)
             i := 0
-            err = rows.Scan(&i, &bb)
+            err := rows.Scan(&i, &bb)
             if err != nil {
             panic(err)
             }
@@ -167,10 +168,12 @@ func Rem(db *sql.DB) http.HandlerFunc {
             panic (err)
         }
 
-        _, err = db.Exec("DELETE FROM blobs WHERE id=" + string(id) + ";")
-        if err != nil {
-            panic(err)
-        }
+       // _, err = db.Exec("DELETE FROM blobs WHERE id=" + string(id) + ";")
+        //if err != nil {
+         //   panic(err)
+       // }
+       q := pg.NewBlobsQ(db)
+       q.DeleteById(string(id))
     }
     return http.HandlerFunc(fn)
 }
@@ -189,12 +192,15 @@ func New(db *sql.DB) http.HandlerFunc {
 
         //struct to DB's json
         bb := Dmarshal(Dblob{b.User_id, b.User_name})
+        q := pg.NewBlobsQ(db)
+        q.InsertBlob(bb)
+
 
         //insert it into DB 
-        _, err = db.Exec("INSERT INTO blobs (blob) VALUES ($1)", bb)
-        if err != nil {
-            panic(err)
-        }
+       // _, err = db.Exec("INSERT INTO blobs (blob) VALUES ($1)", bb)
+       // if err != nil {
+         //   panic(err)
+       // }
     }
     return http.HandlerFunc(fn)
 }
