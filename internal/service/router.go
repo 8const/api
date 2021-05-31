@@ -1,18 +1,56 @@
 package service
 
 import (
+    "fmt"
+    "gopkg.in/yaml.v2"
+    "io/ioutil"
+    "log"
     "database/sql"
     "net/http"
     "github.com/go-chi/chi"
     "gitlab.com/distributed_lab/ape"
     "api/internal/service/handlers"
 )
+//struct to parse config.yaml
+type con struct {
+    LOG struct {
+        DISSENTRY bool `yaml:disable_sentry`
+    }
+    DB struct {
+        URL string`yaml:url`
+    }
+    LISTENER struct {
+        ADDR string `yaml:addr`
+    }
 
+    COP struct {
+        DISABLED bool   `yaml:disabled`
+        ENDPOINT string `yaml endpoint`
+        UPSTREAM string `yaml upstream`
+        SNAME    string `yaml: service_name`
+        SPORT    string `yaml:service_port`
+    }
+}
+
+func (c *con) getConf() *con {
+    yamlFile, err := ioutil.ReadFile("config.yaml")
+    if err != nil {
+        log.Printf("yamlFile.Get err   #%v ", err)
+    }
+    err = yaml.Unmarshal(yamlFile, c)
+    if err != nil {
+        log.Fatalf("Unmarshal: %v", err)
+    }
+    return c
+}
 
 
 func (s *service) router() chi.Router {
-    db, err := sql.Open("postgres",
-    "postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable")
+	var c con
+	c.getConf()
+
+    //DB is from config.yaml
+    db, err := sql.Open("postgres", c.DB.URL)
 
     err = db.Ping()
     if err != nil {
