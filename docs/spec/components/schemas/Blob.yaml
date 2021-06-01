@@ -1,0 +1,16 @@
+allOf:
+- type: object
+  required:
+  - attributes
+  properties:
+    attributes:
+      type: object
+      required:
+        - user_id 
+        - user_name
+      properties:
+        user_id:
+          type: int 
+        user_name:
+          type: string
+
