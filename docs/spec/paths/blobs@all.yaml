@@ -1,0 +1,12 @@
+get:
+  tags:
+  - Blobs 
+  summary: List all blobs 
+  operationId: list 
+  responses:
+    '201':
+      description: listed 
+    '500':
+      description: internal error
+
+

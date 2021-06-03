@@ -1,0 +1,13 @@
+delete:
+  tags:
+  - Blobs 
+  summary: Delete blob by id 
+  operationId: Delete 
+  
+  responses:
+    '200':
+      description: deleted a blob
+    '500':
+      description: internal error
+
+

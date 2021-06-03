@@ -1,0 +1,26 @@
+get:
+  tags:
+  - Blobs 
+  summary: Search blob by id 
+
+  perationId: Search
+
+
+  responses:
+    '200':
+      description: found a blob
+      content:
+        application/vnd.api+json:
+          schema:
+            type: object
+            required:
+            - data
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/Blob'
+ 
+    '500':
+      description: internal error
+
+

@@ -1,7 +1,6 @@
 package pg
 
 import (
-    "fmt"
 	"database/sql"
 	sq "github.com/Masterminds/squirrel"
 )
@@ -24,9 +23,8 @@ func NewBlobsQ(db *sql.DB) *BlobsQ {
     }
 }
 
-func (q  *BlobsQ) SelectById(id int) []byte {
+func (q  *BlobsQ) SelectById(id string) []byte {
     query, _, _ := q.sqlSelect.Where("id=$1").ToSql()
-    fmt.Println(query)
     var bb []byte
     err := ((q.db).QueryRow(query, id)).Scan(&bb)
     if err != nil {
@@ -37,7 +35,6 @@ func (q  *BlobsQ) SelectById(id int) []byte {
 
 func (q  *BlobsQ) SelectAll() *sql.Rows {
     query, _, _ := q.sqlSelectStar.ToSql()
-    fmt.Println(query)
     rows, err := ((q.db).Query(query))
     if err != nil {
         panic(err)
@@ -47,7 +44,6 @@ func (q  *BlobsQ) SelectAll() *sql.Rows {
 
 func (q  *BlobsQ) DeleteById(id string) {
     query, _, _ := q.sqlDelete.Where("id=$1").ToSql()
-    fmt.Println(query)
     _, err := ((q.db).Exec(query, id))
     if err != nil {
         panic(err)
@@ -56,7 +52,6 @@ func (q  *BlobsQ) DeleteById(id string) {
 
 func (q  *BlobsQ) InsertBlob(blob []byte) {
     query, _, _ := q.sqlInsert.Values("($1)").PlaceholderFormat(sq.Dollar).ToSql()
-    fmt.Println(string(query))
     _, err := (q.db).Exec(query, blob)
     if err != nil {
         panic(err)

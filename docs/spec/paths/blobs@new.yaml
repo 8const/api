@@ -1,0 +1,23 @@
+post:
+  tags:
+  - Blobs 
+  summary: Create new blob 
+  operationId: New 
+  requestBody:
+    content:
+      application/vnd.api+json:
+        schema:
+          type: object
+          required:
+          - data
+          properties:
+            data:
+              type: object
+              $ref: '#/components/schemas/Blob'
+  responses:
+    '201':
+      description: created new blob
+    '500':
+      description: internal error
+
+

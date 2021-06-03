@@ -1,7 +1,6 @@
 package service
 
 import (
-    "fmt"
     "gopkg.in/yaml.v2"
     "io/ioutil"
     "log"
@@ -71,17 +70,17 @@ func (s *service) router() chi.Router {
     )
 
     //endpoint to searche by id
-    r.Get("/", handlers.Ser(db))
+    r.Get("/blobs/search/{id}", handlers.Ser(db))
 
     //endpoint to list all rows
-    r.Get("/all", handlers.Lis(db))
+    r.Get("/blobs/all", handlers.Lis(db))
 
     //endpoint to create new rows 
-    r.Post("/", handlers.New(db))
+    r.Post("/blobs/new", handlers.New(db))
 
     //endpoint to delete row by id
-    r.Delete("/", handlers.Rem(db))
+    r.Delete("/blobs/delete/{id}", handlers.Rem(db))
 
-    http.ListenAndServe(":8080", r)
+    http.ListenAndServe(":8000", r)
     return r
 }

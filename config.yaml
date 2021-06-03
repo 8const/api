@@ -5,7 +5,7 @@ db:
   url: postgres://postgres:postgres@127.0.0.1:5432/postgres?sslmode=disable
 
 listener:
-  addr: :8080 # TODO configure and rm this TODO
+  addr: :8000 # TODO configure and rm this TODO
 
 cop:
   disabled: true

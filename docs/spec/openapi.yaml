@@ -4,5 +4,5 @@ info:
   title: api 
   description: ''
 servers:
-  - url: 'https://api.demo.tokend.io'
+  - url: 'https://notyetarealurl'
     description: TokenD Developer Environment
