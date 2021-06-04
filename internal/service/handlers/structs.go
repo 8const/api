@@ -22,7 +22,6 @@ func DriveScan(src, dest interface{}) error {
 	if err != nil {
 		return err
 	}
-
 	err = json.Unmarshal(data, dest)
 	if err != nil {
 		return errors.Wrap(err, "failed to unmarshal jsonb")
@@ -50,16 +49,31 @@ func ConvertJSONB(src interface{}) ([]byte, error) {
 
 //for encoding/decoding incoming client's json
 type Jblob struct {
-    User_id   int64  `json:'user_id'`
-    User_name string `json:'user_name'`
+    User_id   int64  `json:"user_id"`
+    User_name string `json:"user_name"`
 }
 
 //for encoding/decoding DB's jsonb
 type Dblob struct {
-    User_id   int64  `db:'user_id'`
-    User_name string `db:'user_name'`
+    User_id   int64  `db:"user_id"`
+    User_name string `db:"user_name"`
 }
 
+
+type Row struct {
+    Id int64   `json:"id"`
+    Blob Jblob `json:"data"`
+}
+
+
+type FinalResponse struct {
+    Data []Row `json:"data"`
+}
+
+/*
+type Data struct {
+    Id 
+*/
 
 //request json to struct
 func Junmarshal(bb []byte) Jblob {
