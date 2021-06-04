@@ -11,16 +11,15 @@ print(
 
 def new(uid, uname):
     blob = '{"user_id":' + str(uid) + ', "user_name":"' + str(uname) + '"}'
-    requests.post("http://127.0.0.1:8080", data=blob)
-    print(blob)
+    print(requests.post("http://127.0.0.1:8000/blobs/new", data=blob))
 
 
 def rem(id):
-    requests.delete("http://127.0.0.1:8080", data=str(id))
+    print(requests.delete("http://127.0.0.1:8000/blobs/delete/"+str(id)))
 
 def lis():
-    print(requests.get("http://127.0.0.1:8080/all").text)
+    print(requests.get("http://127.0.0.1:8000/blobs/all").text)
 
 
 def ser(id):
-    print(requests.get("http://127.0.0.1:8080/?id="+str(id)).text)
+    print(requests.get("http://127.0.0.1:8000/blobs/search/"+str(id)).text)

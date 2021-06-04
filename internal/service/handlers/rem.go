@@ -14,10 +14,18 @@ func Rem(db *sql.DB) http.HandlerFunc {
 
         //query db
         q := pg.NewBlobsQ(db)
-        q.DeleteById(string(id))
+        nChanges, err := q.DeleteById(string(id))
+        if err != nil {
+            w.WriteHeader(500)
+            return
+        }
 
-        w.WriteHeader(201)
+        if nChanges == 0 {
+            w.WriteHeader(404)
+            return
+        }
 
+        w.WriteHeader(200)
     }
     return http.HandlerFunc(fn)
 }

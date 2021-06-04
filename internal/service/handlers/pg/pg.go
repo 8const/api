@@ -23,14 +23,14 @@ func NewBlobsQ(db *sql.DB) *BlobsQ {
     }
 }
 
-func (q  *BlobsQ) SelectById(id string) []byte {
+func (q  *BlobsQ) SelectById(id string) ([]byte, error) {
     query, _, _ := q.sqlSelect.Where("id=$1").ToSql()
     var bb []byte
     err := ((q.db).QueryRow(query, id)).Scan(&bb)
     if err != nil {
-        panic(err)
+        return nil, err
     }
-    return bb
+    return bb, nil
 }
 
 func (q  *BlobsQ) SelectAll() *sql.Rows {
@@ -42,11 +42,18 @@ func (q  *BlobsQ) SelectAll() *sql.Rows {
     return rows
 }
 
-func (q  *BlobsQ) DeleteById(id string) {
+func (q  *BlobsQ) DeleteById(id string) (int, error) {
     query, _, _ := q.sqlDelete.Where("id=$1").ToSql()
-    _, err := ((q.db).Exec(query, id))
+    res, err := q.db.Exec(query, id)
     if err != nil {
-        panic(err)
+        return -1, err
+    }
+
+    nChanges, err := res.RowsAffected()
+    if err != nil {
+        return -1, err
+    } else {
+        return int(nChanges), nil
     }
 }
 

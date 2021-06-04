@@ -66,14 +66,15 @@ type Row struct {
 }
 
 
+//to marshal list all
 type FinalResponse struct {
     Data []Row `json:"data"`
 }
 
-/*
-type Data struct {
-    Id 
-*/
+//to marshal search by id results
+type SearchResult struct {
+    Data Dblob `json:"data"`
+}
 
 //request json to struct
 func Junmarshal(bb []byte) Jblob {

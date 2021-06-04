@@ -15,17 +15,22 @@ func Ser(db *sql.DB) http.HandlerFunc {
         id := chi.URLParam(r, "id")
 
         q := pg.NewBlobsQ(db)
-        bb := q.SelectById(string(id))
+        bb, err := q.SelectById(string(id))
+        if err != nil {
+            w.WriteHeader(404)
+            return
+        }
 
         //decode row to struct 
         var b Dblob
-        err := DriveScan(bb, &b)
+        err = DriveScan(bb, &b)
         if err != nil {
             w.WriteHeader(500)
 			return
         }
 
-        json, err := json.Marshal(b)
+        res := SearchResult{b}
+        json, err := json.Marshal(res)
         if err != nil {
             w.WriteHeader(500)
 			return
@@ -36,5 +41,3 @@ func Ser(db *sql.DB) http.HandlerFunc {
     }
     return http.HandlerFunc(fn)
 }
-
-

@@ -4,8 +4,21 @@ get:
   summary: List all blobs 
   operationId: list 
   responses:
-    '201':
+    '200':
       description: listed 
+      content:
+        application/vnd.api+json:
+          schema:
+            type: object
+            required:
+            - data
+            properties:
+              data:
+                type: object
+                $ref: '#/components/schemas/AllBlobs'
+ 
+    '404':
+      description: not found a blob with such id
     '500':
       description: internal error
 

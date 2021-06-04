@@ -7,6 +7,8 @@ delete:
   responses:
     '200':
       description: deleted a blob
+    '404':
+      description: no blob found with such id
     '500':
       description: internal error
 
