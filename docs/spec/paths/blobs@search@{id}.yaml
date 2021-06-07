@@ -2,25 +2,26 @@ get:
   tags:
   - Blobs 
   summary: Search blob by id 
-
-  perationId: Search
-
+  operationId: Lis 
 
   responses:
     '200':
-      description: found a blob
+      description: OK 
       content:
-        application/vnd.api+json:
-          schema:
-            type: object
-            required:
-            - data
-            properties:
-              data:
+            application/vnd.api+json:
+              schema:
                 type: object
-                $ref: '#/components/schemas/Blob'
+                required:
+                - data
+                properties:
+                  data:
+                    type: object
+                    $ref: '#/components/schemas/Blob'
+
  
+    '400':
+      description: Bad Request (id has to be an integer) 
+    '404':
+      description: Not Found (no such blob in db) 
     '500':
-      description: internal error
-
-
+      description: Internal Server Error

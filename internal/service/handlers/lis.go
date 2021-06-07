@@ -47,6 +47,7 @@ func Lis(db *sql.DB) http.HandlerFunc {
             return
         }
 
+        w.WriteHeader(200)
         w.Write(y)
     }
 

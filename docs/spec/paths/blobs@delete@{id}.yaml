@@ -5,11 +5,13 @@ delete:
   operationId: Delete 
   
   responses:
-    '200':
-      description: deleted a blob
+    '200': 
+      description: OK (deleted a blob)
+    '400':
+      description: Bad Request Body (id has to be an integer) 
     '404':
-      description: no blob found with such id
+      description: Not Found (no such blob in db) 
     '500':
-      description: internal error
+      description: Internal Server Error
 
 

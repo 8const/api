@@ -2,24 +2,22 @@ get:
   tags:
   - Blobs 
   summary: List all blobs 
-  operationId: list 
+  operationId: Lis 
   responses:
-    '200':
-      description: listed 
+    '200': 
+      description: OK (listed all blobs)
       content:
-        application/vnd.api+json:
-          schema:
-            type: object
-            required:
-            - data
-            properties:
-              data:
+            application/vnd.api+json:
+              schema:
                 type: object
-                $ref: '#/components/schemas/AllBlobs'
- 
-    '404':
-      description: not found a blob with such id
+                required:
+                - data
+                properties:
+                  data:
+                    type: object
+                    $ref: '#/components/schemas/AllBlobs'
+
     '500':
-      description: internal error
+      description: Internal Server Error 
 
 

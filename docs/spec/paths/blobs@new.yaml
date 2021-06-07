@@ -15,9 +15,11 @@ post:
               type: object
               $ref: '#/components/schemas/Blob'
   responses:
-    '200':
-      description: created new blob
+    '201':
+      description: Created New Blob
+    '400':
+      description: Bad Request Body 
     '500':
-      description: internal error
+      description: Internal Server Error
 
 
