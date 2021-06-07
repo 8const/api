@@ -1,6 +1,5 @@
 package handlers
 import (
-	//"github.com/google/jsonapi"
     "database/sql"
     "net/http"
     "github.com/go-chi/chi"

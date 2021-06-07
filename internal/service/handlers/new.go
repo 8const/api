@@ -16,10 +16,7 @@ func New(db *sql.DB) http.HandlerFunc {
             return
         }
 
-        //json from req body to struct 
-        //b := Junmarshal(body)
-        //change body to SearchResult
-        //var b Jblob
+        //put json data into struct
         var b SearchResult
         err = json.Unmarshal(body, &b)
         if err != nil {
@@ -29,7 +26,6 @@ func New(db *sql.DB) http.HandlerFunc {
 
 
         //struct to DB's json
-        //bb := Dmarshal(Dblob{b.User_id, b.User_name})
         bb, err := DriverValue(b.Data)
         if err != nil {
 			http.Error(w, "Internal Server Error", 500)

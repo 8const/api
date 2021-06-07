@@ -56,7 +56,7 @@ func ConvertJSONB(src interface{}) ([]byte, error) {
 	return data, nil
 }
 
-//generally b is used for blob as a a struct
+//generally b is used for blob as a struct
 //bb is bytes of marshalled struct
 
 //for encoding/decoding incoming client's json
@@ -86,39 +86,5 @@ type FinalResponse struct {
 //to marshal search by id results
 type SearchResult struct {
     Data Dblob `json:"data"`
-}
-
-//request json to struct
-func Junmarshal(bb []byte) Jblob {
-    var res Jblob
-    err := json.Unmarshal(bb, &res)
-    if err != nil {
-        panic(err)
-    }
-    return res
-}
-
-//struct to DB's json
-func Dmarshal(b Dblob) []byte{
-    res, err := json.Marshal(b)
-    if err != nil {
-        panic(err)
-    }
-    return res
-}
-
-//DB's json to struct
-func Dunmarshal(bb []byte) Dblob {
-    var res Dblob
-    err := json.Unmarshal(bb, &res)
-    if err != nil {
-        panic(err)
-    }
-    return res
-}
-
-//used to make string for json response nicer by removing whitespace and extra ','
-func remel(slice []rune, i int) []rune {
-    return append(slice[:i], slice[i+1:]...)
 }
 
