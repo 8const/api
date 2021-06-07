@@ -10,7 +10,7 @@ print(
      )
 
 def new(uid, uname):
-    blob = '{"user_id":' + str(uid) + ', "user_name":"' + str(uname) + '"}'
+    blob = '{"data":{"user_id":' + str(uid) + ', "user_name":"' + str(uname) + '"}}'
     print(requests.post("http://127.0.0.1:8000/blobs/new", data=blob))
 
 
@@ -18,8 +18,10 @@ def rem(id):
     print(requests.delete("http://127.0.0.1:8000/blobs/delete/"+str(id)))
 
 def lis():
+    print(requests.get("http://127.0.0.1:8000/blobs/all"))
     print(requests.get("http://127.0.0.1:8000/blobs/all").text)
 
 
 def ser(id):
+    print(requests.get("http://127.0.0.1:8000/blobs/search/"+str(id)))
     print(requests.get("http://127.0.0.1:8000/blobs/search/"+str(id)).text)

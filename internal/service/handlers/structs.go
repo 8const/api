@@ -2,9 +2,21 @@ package handlers
 
 import (
 	"database/sql/driver"
+    "unicode"
 	"encoding/json"
 	"gitlab.com/distributed_lab/logan/v3/errors"
 )
+
+func IsInt(s string) bool {
+    for _, c := range s {
+        if !unicode.IsDigit(c) {
+            return false
+        }
+    }
+    return true
+}
+
+
 
 //driverValue - converts interface into db supported type
 func DriverValue(data interface{}) (driver.Value, error) {

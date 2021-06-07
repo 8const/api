@@ -1,5 +1,6 @@
 package handlers
 import (
+	//"github.com/google/jsonapi"
     "database/sql"
     "net/http"
     "github.com/go-chi/chi"
@@ -12,16 +13,21 @@ func Rem(db *sql.DB) http.HandlerFunc {
         //get id from request
         id := (chi.URLParam(r, "id"))
 
+		if ! IsInt(id) {
+			http.Error(w, "Bad Request (id has to be an integer)", 400)
+            return
+		}
+
         //query db
         q := pg.NewBlobsQ(db)
         nChanges, err := q.DeleteById(string(id))
         if err != nil {
-            w.WriteHeader(500)
+			http.Error(w, "Internal server error", 500)
             return
         }
 
         if nChanges == 0 {
-            w.WriteHeader(404)
+			http.Error(w, "Not Found (no such blob in db)", 404)
             return
         }
 

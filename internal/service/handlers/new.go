@@ -12,32 +12,34 @@ func New(db *sql.DB) http.HandlerFunc {
         //get request body
         body, err := ioutil.ReadAll(r.Body)
         if err != nil {
-            w.WriteHeader(400)
+			http.Error(w, "Bad request (please provide a valid body)", 400)
             return
         }
 
         //json from req body to struct 
         //b := Junmarshal(body)
-        var b Jblob
+        //change body to SearchResult
+        //var b Jblob
+        var b SearchResult
         err = json.Unmarshal(body, &b)
         if err != nil {
-            w.WriteHeader(400)
+			http.Error(w, "Bad request (please provide a valid body)", 400)
             return
         }
 
 
         //struct to DB's json
         //bb := Dmarshal(Dblob{b.User_id, b.User_name})
-        bb, err := DriverValue(b)
+        bb, err := DriverValue(b.Data)
         if err != nil {
-            w.WriteHeader(400)
+			http.Error(w, "Internal Server Error", 500)
             return
         }
         if bbb, ok := bb.([]byte); ok {
             q := pg.NewBlobsQ(db)
             q.InsertBlob(bbb)
         } else {
-            w.WriteHeader(500)
+			http.Error(w, "Internal server error", 500)
             return
         }
 

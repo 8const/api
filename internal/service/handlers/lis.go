@@ -23,13 +23,13 @@ func Lis(db *sql.DB) http.HandlerFunc {
 
             err := rows.Scan(&i, &bb)
             if err != nil {
-                w.WriteHeader(500)
+				http.Error(w, "Internal Server Error", 500)
                 return
             }
 
             err = DriveScan(bb, &b)
             if err != nil {
-                w.WriteHeader(500)
+				http.Error(w, "Internal Server Error", 500)
                 return
             }
 
@@ -43,7 +43,7 @@ func Lis(db *sql.DB) http.HandlerFunc {
         x := FinalResponse{data}
         y, err := json.Marshal(x)
         if err != nil {
-            w.WriteHeader(500)
+		    http.Error(w, "Internal Server Error", 500)
             return
         }
 
