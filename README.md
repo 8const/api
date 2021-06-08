@@ -34,3 +34,17 @@ USE PYTHON CLIENT:
       $ python3
       >>> from client import *
       /*help message will be printed*/
+      
+      
+GENERATE DOCS AND VEIW THEM LOCALLY (something like that, might be wrong):
+
+      $ cd docs
+      $ npm install
+      $ npm run build
+      $ cd ..
+      $ ./generate.sh
+      $ cd docs
+      $ npm run start
+      $ google-chrome http://127.0.0.1:8080 (or any other browser) 
+      
+      
