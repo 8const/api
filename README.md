@@ -45,6 +45,6 @@ GENERATE DOCS AND VEIW THEM LOCALLY (something like that, might be wrong):
       $ ./generate.sh
       $ cd docs
       $ npm run start
-      $ google-chrome http://127.0.0.1:8080 (or any other browser) 
+      $ ungoogled-chromium http://127.0.0.1:8080 (or any other browser) 
       
       
